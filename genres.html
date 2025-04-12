@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse movie trailers by genre - Action, Comedy, Drama, Sci-Fi, Horror, Romance and more. Find your favorite movie categories.">
+    <title>Movie Genres - Browse Trailers by Category | MovieTrail</title>
+    
+    <!-- Schema.org markup for Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Movie Genres",
+      "description": "Browse movie trailers by different genres and categories",
+      "url": "https://movietrail.example.com/genres.html"
+    }
+    </script>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #e50914;
+            --primary-dark: #b2070f;
+            --dark-color: #141414;
+            --light-color: #f4f4f4;
+            --gray-color: #999;
+            --dark-gray: #222;
+            --light-gray: #333;
+            --transition: all 0.3s ease;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--light-color);
+            transition: var(--transition);
+        }
+        
+        a:hover {
+            color: var(--primary-color);
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: rgba(0, 0, 0, 0.9);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+            transition: var(--transition);
+        }
+        
+        header.scrolled {
+            background-color: var(--dark-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .logo span {
+            color: var(--light-color);
+        }
+        
+        nav ul {
+            display: flex;
+            gap: 25px;
+        }
+        
+        nav ul li a {
+            font-weight: 500;
+            font-size: 16px;
+            position: relative;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+        
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 100%;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            padding: 8px 15px;
+            width: 250px;
+        }
+        
+        .search-box input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--light-color);
+            padding: 5px;
+            width: 100%;
+            font-size: 14px;
+        }
+        
+        .search-box button {
+            background: transparent;
+            border: none;
+            color: var(--light-color);
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Hero Banner */
+        .hero {
+            height: 60vh;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4)), 
+                        url('https://image.tmdb.org/t/p/original/wwemzKWzjKYJFfCeiB57q3r4Bcm.png') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            margin-top: 70px;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to top, var(--dark-color), transparent);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            max-width: 600px;
+            position: relative;
+            z-index: 2;
+            padding: 0 40px;
+            text-align: center;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            margin-bottom: 25px;
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        /* Main Content */
+        .section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .section-title h2 {
+            font-size: 28px;
+            position: relative;
+            padding-left: 15px;
+        }
+        
+        .section-title h2::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            height: 80%;
+            width: 4px;
+            background-color: var(--primary-color);
+        }
+        
+        .section-title a {
+            font-size: 14px;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        
+        .section-title a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Genre Grid */
+        .genre-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .genre-card {
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: var(--transition);
+            position: relative;
+            height: 200px;
+        }
+        
+        .genre-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+        }
+        
+        .genre-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+            opacity: 0.7;
+            transition: var(--transition);
+        }
+        
+        .genre-card:hover .genre-bg {
+            opacity: 0.9;
+            transform: scale(1.05);
+        }
+        
+        .genre-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .genre-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .genre-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .genre-count {
+            font-size: 14px;
+            color: var(--gray-color);
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 16px;
+            transition: var(--transition);
+            gap: 8px;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--light-color);
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        /* Ad Spaces */
+        .ad-banner {
+            background-color: var(--dark-gray);
+            padding: 20px;
+            text-align: center;
+            margin: 40px 0;
+            border-radius: 8px;
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Popular Movies Section */
+        .popular-movies {
+            margin-top: 60px;
+        }
+        
+        .movie-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 25px;
+        }
+        
+        .movie-card {
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .movie-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+        }
+        
+        .movie-poster {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+        }
+        
+        .movie-poster img {
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .movie-card:hover .movie-poster img {
+            transform: scale(1.05);
+        }
+        
+        .movie-rating {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #ffd700;
+            padding: 5px 8px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+        
+        .movie-info {
+            padding: 15px;
+        }
+        
+        .movie-title {
+            font-size: 16px;
+            margin-bottom: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .movie-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: var(--gray-color);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #0a0a0a;
+            padding: 60px 0 0;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo span {
+            color: var(--light-color);
+        }
+        
+        .footer-about p {
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: var(--gray-color);
+            line-height: 1.7;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--light-gray);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .footer-links h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-links h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links ul li a {
+            font-size: 14px;
+            color: var(--gray-color);
+            transition: var(--transition);
+            display: block;
+        }
+        
+        .footer-links ul li a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid var(--light-gray);
+            font-size: 14px;
+            color: var(--gray-color);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .genre-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .movie-grid {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            }
+        }
+        
+        @media (max-width: 992px) {
+            nav ul {
+                gap: 15px;
+            }
+            
+            .search-box {
+                width: 200px;
+            }
+            
+            .hero h1 {
+                font-size: 40px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 70px);
+                background-color: var(--dark-color);
+                transition: var(--transition);
+                z-index: 999;
+                padding: 30px;
+            }
+            
+            nav.active {
+                left: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul li a {
+                font-size: 18px;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .search-box {
+                margin-left: auto;
+                margin-right: 15px;
+                width: 180px;
+            }
+            
+            .hero {
+                height: 50vh;
+            }
+            
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .genre-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 20px;
+            }
+            
+            .movie-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 15px;
+            }
+            
+            .movie-poster {
+                height: 225px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .logo {
+                font-size: 24px;
+            }
+            
+            .hero {
+                height: 40vh;
+                margin-top: 60px;
+            }
+            
+            .hero-content {
+                padding: 0 20px;
+            }
+            
+            .hero h1 {
+                font-size: 28px;
+                margin-bottom: 15px;
+            }
+            
+            .section-title h2 {
+                font-size: 24px;
+            }
+            
+            .genre-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .genre-card {
+                height: 180px;
+            }
+            
+            .genre-icon {
+                font-size: 32px;
+            }
+            
+            .genre-title {
+                font-size: 20px;
+            }
+            
+            .movie-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 10px;
+            }
+            
+            .movie-poster {
+                height: 180px;
+            }
+            
+            .movie-info {
+                padding: 10px;
+            }
+            
+            .movie-title {
+                font-size: 14px;
+            }
+            
+            .movie-meta {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header/Navbar -->
+    <header id="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">Movie<span>Trail</span></a>
+            
+            <nav id="nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="trailers.html">Latest Trailers</a></li>
+                    <li><a href="upcoming.html">Upcoming</a></li>
+                    <li><a href="genres.html" class="active">Genres</a></li>
+                    <li><a href="top-rated.html">Top Rated</a></li>
+                </ul>
+            </nav>
+            
+            <div class="search-box">
+                <input type="text" placeholder="Search movies...">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <div class="mobile-menu" id="mobileMenu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Browse Movies by Genre</h1>
+            <p>Discover trailers from your favorite movie categories. Action, comedy, drama, horror and more.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Top Banner Ad -->
+        <div class="container">
+            <div class="ad-banner">
+                <!-- Google AdSense Banner Ad -->
+                <div style="width: 100%; height: 90px; background-color: #333; display: flex; align-items: center; justify-content: center;">
+                    <span>Advertisement</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- All Genres Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>All Movie Genres</h2>
+                </div>
+                
+                <div class="genre-grid">
+                    <!-- Action -->
+                    <a href="genre-action.html" class="genre-card">
+                        <div class="genre-bg" style="background-image: url('https://image.tmdb.org/t/p/original/8Y43POKjjKDGI9MH89NW0NAzzp8.jpg');"></div>
+                        <div class="genre-content">
+                            <div class="genre-icon"><i class="fas fa-explosion"></i></div>
+                            <h3 class="genre-title">Action</h3>
+                            <div class="genre-count">1,245 Trailers</div>
+                        </div>
+                    </a>
+                    
+                    <!-- Comedy -->
+                    <a href="genre-comedy.html" class="genre-card">
+                        <div class="genre-bg" style="background-image: url('https://image.tmdb.org/t/p/original/1pqeItLQ0FJ0kLUMSVnR6QKXvqU.jpg');"></div>
+                        <div class="genre-content">
+                            <div class="genre-icon"><i class="fas fa-laugh-squint"></i></div>
+                            <h3 class="genre-title">Comedy</h3>
+                            <div class="genre-count">892 Trailers</div>
+                        </div>
+                    </a>
+                    
+                    <!-- Drama -->
+                    <a href="genre-drama.html" class="genre-card">
+                        <div class="genre-bg" style="background-image: url('https://image.tmdb.org/t/p/original/5mzr6JZbrqnqD8rCEvPhuCE5Fw2.jpg');"></div>
+                        <div class="genre-content">
+                            <div class="genre-icon"><i class="fas fa-theater-masks"></i></div>
+                            <h3 class="genre-title">Drama</h3>
+                            <div class="genre-count">1,103 Trailers</div>
+                        </div>
+                    </a>
+                    
+                    <!-- Sci-Fi -->
+                    <a href="genre-scifi.html" class="genre-card">
+                        <div class="genre-bg" style="background-image: url('https://image.tmdb.org/t/p/original/7RyHsO4yDXtBv1zUU3mTpHeQ0d5.jpg');"></div>
+                        <div class="genre-content">
+                            <div class="genre-icon"><i class="fas fa-rocket"></i></div>
+                            <h3 class="genre-title">Sci-Fi</h3>
+                            <div class="genre-count">756 Trailers</div>
+                        </div>
+                    </a>
+                    
+                    <!-- Horror -->
+                    <a href="genre-horror.html" class="genre-card">
+                        <div class="genre-bg" style="background-image: url('https://image.tmdb.org/t/p/original/wSJLuxG6HdJEzZQ3Xr24s5L0i6D.jpg');"></div>
+                        <div class="genre-content">
+                            <div class="genre-icon"><i class="fas fa-ghost"></i></div>
+                            <h3 class="genre-title">Horror</h3>
+                            <div class="genre-count">543 Trailers</div>
+                        </div>
+                    </a>
+                    
+                    <!-- Romance -->
+                    <a href="genre-romance.html" class="genre-card">
+                        <div class="genre-bg" style="background-image: url('https://image.tmdb.org/t/p/original/6KxiEWyIDpz1ikmD7nv3GTX4Uoj.jpg');"></div>
+                        <div class="genre-content">
+                            <div class="genre-icon"><i class="fas fa-heart"></i></div>
+                            <h3 class="genre-title">Romance</h3>
+                            <div class="genre-count">678 Trailers</div>
+                        </div>
+                    </a>
+                    
+                    <!-- Animation -->
+                    <a href="genre-animation.html" class="genre-card">
+                        <div class="genre-bg" style="background-image: url('https://image.tmdb.org/t/p/original/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg');"></div>
+                        <div class="genre-content">
+                            <div class="genre-icon"><i class="fas fa-film"></i></div>
+                            <h3 class="genre-title">Animation</h3>
+                            <div class="genre-count">432 Trailers</div>
+                        </div>
+                    </a>
+                    
+                    <!-- Thriller -->
+                    <a href="genre-thriller.html" class="genre-card">
+                        <div class="genre-bg" style="background-image: url('https://image.tmdb.org/t/p/original/5cnLoWq9o5tuLe1Zq4BTX4LwZ2B.jpg');"></div>
+                        <div class="genre-content">
+                            <div class="genre-icon"><i class="fas fa-user-secret"></i></div>
+                            <h3 class="genre-title">Thriller</h3>
+                            <div class="genre-count">587 Trailers</div>
+                        </div>
+                    </a>
+                    
+                    <!-- Fantasy -->
+                    <a href="genre-fantasy.html" class="genre-card">
+                        <div class="genre-bg" style="background-image: url('https://image.tmdb.org/t/p/original/9yBVqNruk6Ykrwc32qrK2TIE5xw.jpg');"></div>
+                        <div class="genre-content">
+                            <div class="genre-icon"><i class="fas fa-dragon"></i></div>
+                            <h3 class="genre-title">Fantasy</h3>
+                            <div class="genre-count">498 Trailers</div>
+                        </div>
+                    </a>
+                    
+                    <!-- Documentary -->
+                    <a href="genre-documentary.html" class="genre-card">
+                        <div class="genre-bg" style="background-image: url('https://image.tmdb.org/t/p/original/5HjzYTihkH7EvOWSE7KcsF6pBMM.jpg');"></div>
+                        <div class="genre-content">
+                            <div class="genre-icon"><i class="fas fa-video"></i></div>
+                            <h3 class="genre-title">Documentary</h3>
+                            <div class="genre-count">321 Trailers</div>
+                        </div>
+                    </a>
+                    
+                    <!-- Crime -->
+                    <a href="genre-crime.html" class="genre-card">
+                        <div class="genre-bg" style="background-image: url('https://image.tmdb.org/t/p/original/3bhkrj58Vtu7enYsRolD1fZdja1.jpg');"></div>
+                        <div class="genre-content">
+                            <div class="genre-icon"><i class="fas fa-handcuffs"></i></div>
+                            <h3 class="genre-title">Crime</h3>
+                            <div class="genre-count">467 Trailers</div>
+                        </div>
+                    </a>
+                    
+                    <!-- Adventure -->
+                    <a href="genre-adventure.html" class="genre-card">
+                        <div class="genre-bg" style="background-image: url('https://image.tmdb.org/t/p/original/6sJcVzGCwrDCBMV0DU6eRzA2UxM.jpg');"></div>
+                        <div class="genre-content">
+                            <div class="genre-icon"><i class="fas fa-mountain"></i></div>
+                            <h3 class="genre-title">Adventure</h3>
+                            <div class="genre-count">589 Trailers</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Mid Content Ad -->
+        <div class="container">
+            <div class="ad-banner">
+                <!-- Google AdSense Banner Ad -->
+                <div style="width: 100%; height: 90px; background-color: #333; display: flex; align-items: center; justify-content: center;">
+                    <span>Advertisement</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Popular in Action Section -->
+        <section class="section popular-movies">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Popular in Action</h2>
+                    <a href="genre-action.html">View All <i class="fas fa-chevron-right"></i></a>
+                </div>
+                
+                <div class="movie-grid">
+                    <!-- Movie Card 1 -->
+                    <div class="movie-card">
+                        <a href="john-wick-4.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg" alt="John Wick: Chapter 4 movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 7.7</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">John Wick: Chapter 4</h3>
+                                <div class="movie-meta">
+                                    <span>2023</span>
+                                    <span>Action</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 2 -->
+                    <div class="movie-card">
+                        <a href="the-batman.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg" alt="The Batman movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 7.8</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">The Batman</h3>
+                                <div class="movie-meta">
+                                    <span>2022</span>
+                                    <span>Action</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 3 -->
+                    <div class="movie-card">
+                        <a href="top-gun-2.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/62HCnUTziyWcpDaBO2i1DX17ljH.jpg" alt="Top Gun: Maverick movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 8.3</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">Top Gun: Maverick</h3>
+                                <div class="movie-meta">
+                                    <span>2022</span>
+                                    <span>Action</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 4 -->
+                    <div class="movie-card">
+                        <a href="black-panther-2.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/sv1xJUazXeYqALzczSZ3O6nkH75.jpg" alt="Black Panther: Wakanda Forever movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 7.2</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">Black Panther: Wakanda Forever</h3>
+                                <div class="movie-meta">
+                                    <span>2022</span>
+                                    <span>Action</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 5 -->
+                    <div class="movie-card">
+                        <a href="mission-impossible.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/NNxYkU70HPurnNCSiCjYAmacwm.jpg" alt="Mission: Impossible - Dead Reckoning Part One movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 7.8</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">Mission: Impossible 7</h3>
+                                <div class="movie-meta">
+                                    <span>2023</span>
+                                    <span>Action</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Popular in Comedy Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Popular in Comedy</h2>
+                    <a href="genre-comedy.html">View All <i class="fas fa-chevron-right"></i></a>
+                </div>
+                
+                <div class="movie-grid">
+                    <!-- Movie Card 1 -->
+                    <div class="movie-card">
+                        <a href="barbie.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/iuFNMS8U5cb6xfzi51Dbkovj7vM.jpg" alt="Barbie movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 7.3</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">Barbie</h3>
+                                <div class="movie-meta">
+                                    <span>2023</span>
+                                    <span>Comedy</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 2 -->
+                    <div class="movie-card">
+                        <a href="the-hangover.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/naXUDzJ7P6ZC7kQLkAKXvD9K4IK.jpg" alt="The Hangover movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 7.7</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">The Hangover</h3>
+                                <div class="movie-meta">
+                                    <span>2009</span>
+                                    <span>Comedy</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 3 -->
+                    <div class="movie-card">
+                        <a href="superbad.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/4KBFqBWj34Zo9Y3uH9b5m4FktQ0.jpg" alt="Superbad movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 7.6</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">Superbad</h3>
+                                <div class="movie-meta">
+                                    <span>2007</span>
+                                    <span>Comedy</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 4 -->
+                    <div class="movie-card">
+                        <a href="bridesmaids.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/zVMyvLgDVXMCHMkkeQKrQLx2zUY.jpg" alt="Bridesmaids movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 6.8</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">Bridesmaids</h3>
+                                <div class="movie-meta">
+                                    <span>2011</span>
+                                    <span>Comedy</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 5 -->
+                    <div class="movie-card">
+                        <a href="deadpool.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/fSRb7vyIP8rQpL0I47P3qUsEKX3.jpg" alt="Deadpool movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 7.6</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">Deadpool</h3>
+                                <div class="movie-meta">
+                                    <span>2016</span>
+                                    <span>Comedy</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <div class="footer-logo">Movie<span>Trail</span></div>
+                    <p>MovieTrail is your premier destination for streaming the latest movie trailers in high definition. Discover upcoming releases and revisit classic moments.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="trailers.html">Latest Trailers</a></li>
+                        <li><a href="upcoming.html">Upcoming Movies</a></li>
+                        <li><a href="top-rated.html">Top Rated</a></li>
+                        <li><a href="genres.html">Browse by Genre</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Categories</h3>
+                    <ul>
+                        <li><a href="genre-action.html">Action</a></li>
+                        <li><a href="genre-comedy.html">Comedy</a></li>
+                        <li><a href="genre-drama.html">Drama</a></li>
+                        <li><a href="genre-scifi.html">Sci-Fi</a></li>
+                        <li><a href="genre-horror.html">Horror</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Help & Info</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="dmca.html">DMCA</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 MovieTrail. All Rights Reserved. All content and materials belong to their respective owners.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobileMenu');
+        const nav = document.getElementById('nav');
+        
+        mobileMenu.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            mobileMenu.classList.toggle('fa-times');
+        });
+        
+        // Sticky Header on Scroll
+        const header = document.getElementById('header');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Lazy Loading for Images
+        document.addEventListener("DOMContentLoaded", function() {
+            const lazyImages = [].slice.call(document.querySelectorAll("img[loading='lazy']"));
+            
+            if ("IntersectionObserver" in window) {
+                let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            let lazyImage = entry.target;
+                            lazyImage.src = lazyImage.dataset.src || lazyImage.src;
+                            lazyImageObserver.unobserve(lazyImage);
+                        }
+                    });
+                });
+                
+                lazyImages.forEach(function(lazyImage) {
+                    lazyImageObserver.observe(lazyImage);
+                });
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

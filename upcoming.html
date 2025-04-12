@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover upcoming movie releases and watch their official trailers. Stay updated with the most anticipated films coming to theaters.">
+    <title>Upcoming Movies | Watch Latest Movie Trailers | MovieTrail</title>
+    
+    <!-- Schema.org markup for Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Upcoming Movies",
+      "description": "Collection of upcoming movie trailers and release information",
+      "url": "https://movietrail.example.com/upcoming.html"
+    }
+    </script>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #e50914;
+            --primary-dark: #b2070f;
+            --dark-color: #141414;
+            --light-color: #f4f4f4;
+            --gray-color: #999;
+            --dark-gray: #222;
+            --light-gray: #333;
+            --transition: all 0.3s ease;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--light-color);
+            transition: var(--transition);
+        }
+        
+        a:hover {
+            color: var(--primary-color);
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: rgba(0, 0, 0, 0.9);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+            transition: var(--transition);
+        }
+        
+        header.scrolled {
+            background-color: var(--dark-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .logo span {
+            color: var(--light-color);
+        }
+        
+        nav ul {
+            display: flex;
+            gap: 25px;
+        }
+        
+        nav ul li a {
+            font-weight: 500;
+            font-size: 16px;
+            position: relative;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+        
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 100%;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            padding: 8px 15px;
+            width: 250px;
+        }
+        
+        .search-box input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--light-color);
+            padding: 5px;
+            width: 100%;
+            font-size: 14px;
+        }
+        
+        .search-box button {
+            background: transparent;
+            border: none;
+            color: var(--light-color);
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Page Header */
+        .page-header {
+            height: 300px;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4)), 
+                        url('https://image.tmdb.org/t/p/original/8Y43POKjjKDGI9MH89NW0NAzzp8.jpg') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            margin-top: 70px;
+            position: relative;
+        }
+        
+        .page-header::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to top, var(--dark-color), transparent);
+            z-index: 1;
+        }
+        
+        .page-header-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+            padding: 0 40px;
+        }
+        
+        .page-title {
+            font-size: 48px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .page-description {
+            margin-bottom: 25px;
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        /* Main Content */
+        .section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .section-title h2 {
+            font-size: 28px;
+            position: relative;
+            padding-left: 15px;
+        }
+        
+        .section-title h2::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            height: 80%;
+            width: 4px;
+            background-color: var(--primary-color);
+        }
+        
+        .section-title a {
+            font-size: 14px;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        
+        .section-title a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Filters */
+        .filters {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 8px 20px;
+            background-color: var(--dark-gray);
+            border-radius: 20px;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--primary-color);
+        }
+        
+        /* Months Navigation */
+        .months-nav {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+        }
+        
+        .months-nav::-webkit-scrollbar {
+            height: 5px;
+        }
+        
+        .months-nav::-webkit-scrollbar-thumb {
+            background-color: var(--primary-color);
+            border-radius: 5px;
+        }
+        
+        .month-btn {
+            padding: 10px 25px;
+            background-color: var(--dark-gray);
+            border-radius: 4px;
+            font-size: 16px;
+            white-space: nowrap;
+            transition: var(--transition);
+        }
+        
+        .month-btn:hover, .month-btn.active {
+            background-color: var(--primary-color);
+        }
+        
+        /* Movie Grid */
+        .movie-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 25px;
+        }
+        
+        .movie-card {
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .movie-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+        }
+        
+        .movie-poster {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+        }
+        
+        .movie-poster img {
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .movie-card:hover .movie-poster img {
+            transform: scale(1.05);
+        }
+        
+        .release-date {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: var(--light-color);
+            padding: 5px 8px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .movie-info {
+            padding: 15px;
+        }
+        
+        .movie-title {
+            font-size: 16px;
+            margin-bottom: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .movie-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: var(--gray-color);
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 16px;
+            transition: var(--transition);
+            gap: 8px;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #0a0a0a;
+            padding: 60px 0 0;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo span {
+            color: var(--light-color);
+        }
+        
+        .footer-about p {
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: var(--gray-color);
+            line-height: 1.7;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--light-gray);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .footer-links h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-links h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links ul li a {
+            font-size: 14px;
+            color: var(--gray-color);
+            transition: var(--transition);
+            display: block;
+        }
+        
+        .footer-links ul li a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid var(--light-gray);
+            font-size: 14px;
+            color: var(--gray-color);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .movie-grid {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            }
+        }
+        
+        @media (max-width: 992px) {
+            nav ul {
+                gap: 15px;
+            }
+            
+            .search-box {
+                width: 200px;
+            }
+            
+            .page-title {
+                font-size: 40px;
+            }
+            
+            .page-description {
+                font-size: 16px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 70px);
+                background-color: var(--dark-color);
+                transition: var(--transition);
+                z-index: 999;
+                padding: 30px;
+            }
+            
+            nav.active {
+                left: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul li a {
+                font-size: 18px;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .search-box {
+                margin-left: auto;
+                margin-right: 15px;
+                width: 180px;
+            }
+            
+            .page-header {
+                height: 250px;
+            }
+            
+            .page-title {
+                font-size: 32px;
+            }
+            
+            .movie-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 15px;
+            }
+            
+            .movie-poster {
+                height: 225px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .logo {
+                font-size: 24px;
+            }
+            
+            .page-header {
+                height: 200px;
+                margin-top: 60px;
+            }
+            
+            .page-header-content {
+                padding: 0 20px;
+            }
+            
+            .page-title {
+                font-size: 28px;
+                margin-bottom: 15px;
+            }
+            
+            .section-title h2 {
+                font-size: 24px;
+            }
+            
+            .movie-grid {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+                gap: 10px;
+            }
+            
+            .movie-poster {
+                height: 180px;
+            }
+            
+            .movie-info {
+                padding: 10px;
+            }
+            
+            .movie-title {
+                font-size: 14px;
+            }
+            
+            .movie-meta {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header/Navbar -->
+    <header id="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">Movie<span>Trail</span></a>
+            
+            <nav id="nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="trailers.html">Latest Trailers</a></li>
+                    <li><a href="upcoming.html" class="active">Upcoming</a></li>
+                    <li><a href="genres.html">Genres</a></li>
+                    <li><a href="top-rated.html">Top Rated</a></li>
+                </ul>
+            </nav>
+            
+            <div class="search-box">
+                <input type="text" placeholder="Search movies...">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <div class="mobile-menu" id="mobileMenu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-content">
+            <h1 class="page-title">Upcoming Movies</h1>
+            <p class="page-description">Discover the most anticipated films coming to theaters. Watch official trailers and get release dates for upcoming blockbusters.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Filters Section -->
+        <section class="section">
+            <div class="container">
+                <div class="filters">
+                    <button class="filter-btn active">All</button>
+                    <button class="filter-btn">Action</button>
+                    <button class="filter-btn">Comedy</button>
+                    <button class="filter-btn">Drama</button>
+                    <button class="filter-btn">Sci-Fi</button>
+                    <button class="filter-btn">Horror</button>
+                    <button class="filter-btn">Animation</button>
+                </div>
+                
+                <div class="months-nav">
+                    <button class="month-btn active">This Month</button>
+                    <button class="month-btn">Next Month</button>
+                    <button class="month-btn">March 2024</button>
+                    <button class="month-btn">April 2024</button>
+                    <button class="month-btn">May 2024</button>
+                    <button class="month-btn">June 2024</button>
+                    <button class="month-btn">July 2024</button>
+                    <button class="month-btn">August 2024</button>
+                </div>
+                
+                <div class="section-title">
+                    <h2>Coming Soon</h2>
+                    <a href="#">View Release Calendar <i class="fas fa-chevron-right"></i></a>
+                </div>
+                
+                <div class="movie-grid">
+                    <!-- Movie Card 1 -->
+                    <div class="movie-card">
+                        <a href="deadpool-3.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/uxBHXaoOvAwy4NpPpP7nNx2rXYQ.jpg" alt="Deadpool & Wolverine movie poster" loading="lazy">
+                                <div class="release-date">Jul 26, 2024</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">Deadpool & Wolverine</h3>
+                                <div class="movie-meta">
+                                    <span>Action</span>
+                                    <span>PG-13</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 2 -->
+                    <div class="movie-card">
+                        <a href="joker-2.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/x3NqAzuTWvnron4pXXyFGkyTFo7.jpg" alt="Joker: Folie à Deux movie poster" loading="lazy">
+                                <div class="release-date">Oct 4, 2024</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">Joker: Folie à Deux</h3>
+                                <div class="movie-meta">
+                                    <span>Crime</span>
+                                    <span>R</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 3 -->
+                    <div class="movie-card">
+                        <a href="venom-3.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/2exdbeL4f0gEdq4qAIE0zRuj2pH.jpg" alt="Venom 3 movie poster" loading="lazy">
+                                <div class="release-date">Nov 8, 2024</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">Venom 3</h3>
+                                <div class="movie-meta">
+                                    <span>Action</span>
+                                    <span>PG-13</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 4 -->
+                    <div class="movie-card">
+                        <a href="gladiator-2.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/2exdbeL4f0gEdq4qAIE0zRuj2pH.jpg" alt="Gladiator 2 movie poster" loading="lazy">
+                                <div class="release-date">Nov 22, 2024</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">Gladiator 2</h3>
+                                <div class="movie-meta">
+                                    <span>Drama</span>
+                                    <span>R</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 5 -->
+                    <div class="movie-card">
+                        <a href="wicked.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/1Ixqs6q2xB5kvtGzZEBZJqJ6S9O.jpg" alt="Wicked movie poster" loading="lazy">
+                                <div class="release-date">Nov 27, 2024</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">Wicked</h3>
+                                <div class="movie-meta">
+                                    <span>Musical</span>
+                                    <span>PG</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 6 -->
+                    <div class="movie-card">
+                        <a href="beetlejuice-2.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/2exdbeL4f0gEdq4qAIE0zRuj2pH.jpg" alt="Beetlejuice 2 movie poster" loading="lazy">
+                                <div class="release-date">Sep 6, 2024</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">Beetlejuice 2</h3>
+                                <div class="movie-meta">
+                                    <span>Comedy</span>
+                                    <span>PG-13</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 7 -->
+                    <div class="movie-card">
+                        <a href="mufasa.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/2exdbeL4f0gEdq4qAIE0zRuj2pH.jpg" alt="Mufasa: The Lion King movie poster" loading="lazy">
+                                <div class="release-date">Dec 20, 2024</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">Mufasa: The Lion King</h3>
+                                <div class="movie-meta">
+                                    <span>Animation</span>
+                                    <span>PG</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 8 -->
+                    <div class="movie-card">
+                        <a href="inside-out-2.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/xeqXXTE1Cd3qNaAEOT6qbhhCsgJ.jpg" alt="Inside Out 2 movie poster" loading="lazy">
+                                <div class="release-date">Jun 14, 2024</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">Inside Out 2</h3>
+                                <div class="movie-meta">
+                                    <span>Animation</span>
+                                    <span>PG</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 9 -->
+                    <div class="movie-card">
+                        <a href="the-bikeriders.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/2exdbeL4f0gEdq4qAIE0zRuj2pH.jpg" alt="The Bikeriders movie poster" loading="lazy">
+                                <div class="release-date">Jun 21, 2024</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">The Bikeriders</h3>
+                                <div class="movie-meta">
+                                    <span>Drama</span>
+                                    <span>R</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 10 -->
+                    <div class="movie-card">
+                        <a href="a-quiet-place-day-one.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/2exdbeL4f0gEdq4qAIE0zRuj2pH.jpg" alt="A Quiet Place: Day One movie poster" loading="lazy">
+                                <div class="release-date">Jun 28, 2024</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">A Quiet Place: Day One</h3>
+                                <div class="movie-meta">
+                                    <span>Horror</span>
+                                    <span>PG-13</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 11 -->
+                    <div class="movie-card">
+                        <a href="twisters.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/2exdbeL4f0gEdq4qAIE0zRuj2pH.jpg" alt="Twisters movie poster" loading="lazy">
+                                <div class="release-date">Jul 19, 2024</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">Twisters</h3>
+                                <div class="movie-meta">
+                                    <span>Action</span>
+                                    <span>PG-13</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 12 -->
+                    <div class="movie-card">
+                        <a href="borderlands.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/2exdbeL4f0gEdq4qAIE0zRuj2pH.jpg" alt="Borderlands movie poster" loading="lazy">
+                                <div class="release-date">Aug 9, 2024</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">Borderlands</h3>
+                                <div class="movie-meta">
+                                    <span>Action</span>
+                                    <span>R</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Most Anticipated Section -->
+        <section class="section" style="background-color: #0f0f0f;">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Most Anticipated</h2>
+                    <a href="#">View All <i class="fas fa-chevron-right"></i></a>
+                </div>
+                
+                <div class="movie-grid">
+                    <!-- Movie Card 1 -->
+                    <div class="movie-card">
+                        <a href="superman-legacy.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/2exdbeL4f0gEdq4qAIE0zRuj2pH.jpg" alt="Superman: Legacy movie poster" loading="lazy">
+                                <div class="release-date">Jul 11, 2025</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">Superman: Legacy</h3>
+                                <div class="movie-meta">
+                                    <span>Action</span>
+                                    <span>PG-13</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 2 -->
+                    <div class="movie-card">
+                        <a href="the-batman-2.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/2exdbeL4f0gEdq4qAIE0zRuj2pH.jpg" alt="The Batman - Part II movie poster" loading="lazy">
+                                <div class="release-date">Oct 3, 2025</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">The Batman - Part II</h3>
+                                <div class="movie-meta">
+                                    <span>Action</span>
+                                    <span>PG-13</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 3 -->
+                    <div class="movie-card">
+                        <a href="avatar-3.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/2exdbeL4f0gEdq4qAIE0zRuj2pH.jpg" alt="Avatar 3 movie poster" loading="lazy">
+                                <div class="release-date">Dec 19, 2025</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">Avatar 3</h3>
+                                <div class="movie-meta">
+                                    <span>Sci-Fi</span>
+                                    <span>PG-13</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 4 -->
+                    <div class="movie-card">
+                        <a href="fantastic-four.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/2exdbeL4f0gEdq4qAIE0zRuj2pH.jpg" alt="Fantastic Four movie poster" loading="lazy">
+                                <div class="release-date">May 2, 2025</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">Fantastic Four</h3>
+                                <div class="movie-meta">
+                                    <span>Action</span>
+                                    <span>PG-13</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Newsletter Section -->
+        <section class="section">
+            <div class="container">
+                <div class="newsletter" style="background-color: var(--dark-gray); padding: 40px; border-radius: 8px; text-align: center;">
+                    <h3 style="font-size: 24px; margin-bottom: 15px;">Never Miss a Release</h3>
+                    <p style="margin-bottom: 25px; color: var(--gray-color); max-width: 600px; margin-left: auto; margin-right: auto;">Subscribe to our newsletter and get updates on new movie releases, trailers, and exclusive content.</p>
+                    <form style="display: flex; max-width: 500px; margin: 0 auto;">
+                        <input type="email" placeholder="Your email address" required style="flex: 1; padding: 12px 15px; border: none; border-radius: 4px 0 0 4px; font-size: 16px;">
+                        <button type="submit" style="padding: 0 25px; background-color: var(--primary-color); color: white; border: none; border-radius: 0 4px 4px 0; cursor: pointer; transition: var(--transition);">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <div class="footer-logo">Movie<span>Trail</span></div>
+                    <p>MovieTrail is your premier destination for streaming the latest movie trailers in high definition. Discover upcoming releases and revisit classic moments.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="trailers.html">Latest Trailers</a></li>
+                        <li><a href="upcoming.html">Upcoming Movies</a></li>
+                        <li><a href="top-rated.html">Top Rated</a></li>
+                        <li><a href="genres.html">Browse by Genre</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Categories</h3>
+                    <ul>
+                        <li><a href="genre-action.html">Action</a></li>
+                        <li><a href="genre-comedy.html">Comedy</a></li>
+                        <li><a href="genre-drama.html">Drama</a></li>
+                        <li><a href="genre-scifi.html">Sci-Fi</a></li>
+                        <li><a href="genre-horror.html">Horror</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Help & Info</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="dmca.html">DMCA</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 MovieTrail. All Rights Reserved. All content and materials belong to their respective owners.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobileMenu');
+        const nav = document.getElementById('nav');
+        
+        mobileMenu.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            mobileMenu.classList.toggle('fa-times');
+        });
+        
+        // Sticky Header on Scroll
+        const header = document.getElementById('header');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Filter Buttons
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                // Filter functionality would go here
+            });
+        });
+        
+        // Month Buttons
+        const monthBtns = document.querySelectorAll('.month-btn');
+        monthBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                monthBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                // Month filtering would go here
+            });
+        });
+        
+        // Lazy Loading for Images
+        document.addEventListener("DOMContentLoaded", function() {
+            const lazyImages = [].slice.call(document.querySelectorAll("img[loading='lazy']"));
+            
+            if ("IntersectionObserver" in window) {
+                let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            let lazyImage = entry.target;
+                            lazyImage.src = lazyImage.dataset.src || lazyImage.src;
+                            lazyImageObserver.unobserve(lazyImage);
+                        }
+                    });
+                });
+                
+                lazyImages.forEach(function(lazyImage) {
+                    lazyImageObserver.observe(lazyImage);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

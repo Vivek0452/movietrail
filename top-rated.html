@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse the highest rated movies of all time. Watch trailers for critically acclaimed films across all genres.">
+    <title>Top Rated Movies - Highest Rated Films | MovieTrail</title>
+    
+    <!-- Schema.org markup for Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Top Rated Movies",
+      "description": "Browse the highest rated movies of all time",
+      "url": "https://movietrail.example.com/top-rated.html"
+    }
+    </script>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #e50914;
+            --primary-dark: #b2070f;
+            --dark-color: #141414;
+            --light-color: #f4f4f4;
+            --gray-color: #999;
+            --dark-gray: #222;
+            --light-gray: #333;
+            --transition: all 0.3s ease;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--light-color);
+            transition: var(--transition);
+        }
+        
+        a:hover {
+            color: var(--primary-color);
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: rgba(0, 0, 0, 0.9);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+            transition: var(--transition);
+        }
+        
+        header.scrolled {
+            background-color: var(--dark-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .logo span {
+            color: var(--light-color);
+        }
+        
+        nav ul {
+            display: flex;
+            gap: 25px;
+        }
+        
+        nav ul li a {
+            font-weight: 500;
+            font-size: 16px;
+            position: relative;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+        
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 100%;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            padding: 8px 15px;
+            width: 250px;
+        }
+        
+        .search-box input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--light-color);
+            padding: 5px;
+            width: 100%;
+            font-size: 14px;
+        }
+        
+        .search-box button {
+            background: transparent;
+            border: none;
+            color: var(--light-color);
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Hero Banner */
+        .hero {
+            height: 60vh;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4)), 
+                        url('https://image.tmdb.org/t/p/original/wwemzKWzjKYJFfCeiB57q3r4Bcm.png') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            margin-top: 70px;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to top, var(--dark-color), transparent);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            max-width: 600px;
+            position: relative;
+            z-index: 2;
+            padding: 0 40px;
+            text-align: center;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            margin-bottom: 25px;
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        /* Main Content */
+        .section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .section-title h2 {
+            font-size: 28px;
+            position: relative;
+            padding-left: 15px;
+        }
+        
+        .section-title h2::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            height: 80%;
+            width: 4px;
+            background-color: var(--primary-color);
+        }
+        
+        .section-title a {
+            font-size: 14px;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        
+        .section-title a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Filter Bar */
+        .filter-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            background-color: var(--light-gray);
+            padding: 15px 20px;
+            border-radius: 8px;
+        }
+        
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .filter-label {
+            font-size: 14px;
+            color: var(--gray-color);
+        }
+        
+        .filter-select {
+            background-color: var(--dark-gray);
+            border: none;
+            color: var(--light-color);
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        /* Movie Grid */
+        .movie-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 25px;
+        }
+        
+        .movie-card {
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .movie-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+        }
+        
+        .movie-poster {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+        }
+        
+        .movie-poster img {
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .movie-card:hover .movie-poster img {
+            transform: scale(1.05);
+        }
+        
+        .movie-rating {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #ffd700;
+            padding: 5px 8px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+        
+        .movie-info {
+            padding: 15px;
+        }
+        
+        .movie-title {
+            font-size: 16px;
+            margin-bottom: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .movie-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: var(--gray-color);
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 16px;
+            transition: var(--transition);
+            gap: 8px;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--light-color);
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        /* Ad Spaces */
+        .ad-banner {
+            background-color: var(--dark-gray);
+            padding: 20px;
+            text-align: center;
+            margin: 40px 0;
+            border-radius: 8px;
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+            gap: 10px;
+        }
+        
+        .pagination a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            background-color: var(--light-gray);
+            transition: var(--transition);
+        }
+        
+        .pagination a:hover, 
+        .pagination a.active {
+            background-color: var(--primary-color);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #0a0a0a;
+            padding: 60px 0 0;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo span {
+            color: var(--light-color);
+        }
+        
+        .footer-about p {
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: var(--gray-color);
+            line-height: 1.7;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--light-gray);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .footer-links h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-links h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links ul li a {
+            font-size: 14px;
+            color: var(--gray-color);
+            transition: var(--transition);
+            display: block;
+        }
+        
+        .footer-links ul li a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid var(--light-gray);
+            font-size: 14px;
+            color: var(--gray-color);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .movie-grid {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            }
+        }
+        
+        @media (max-width: 992px) {
+            nav ul {
+                gap: 15px;
+            }
+            
+            .search-box {
+                width: 200px;
+            }
+            
+            .hero h1 {
+                font-size: 40px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .filter-bar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 70px);
+                background-color: var(--dark-color);
+                transition: var(--transition);
+                z-index: 999;
+                padding: 30px;
+            }
+            
+            nav.active {
+                left: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul li a {
+                font-size: 18px;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .search-box {
+                margin-left: auto;
+                margin-right: 15px;
+                width: 180px;
+            }
+            
+            .hero {
+                height: 50vh;
+            }
+            
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .movie-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 15px;
+            }
+            
+            .movie-poster {
+                height: 225px;
+            }
+            
+            .filter-group {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .logo {
+                font-size: 24px;
+            }
+            
+            .hero {
+                height: 40vh;
+                margin-top: 60px;
+            }
+            
+            .hero-content {
+                padding: 0 20px;
+            }
+            
+            .hero h1 {
+                font-size: 28px;
+                margin-bottom: 15px;
+            }
+            
+            .section-title h2 {
+                font-size: 24px;
+            }
+            
+            .movie-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 10px;
+            }
+            
+            .movie-poster {
+                height: 180px;
+            }
+            
+            .movie-info {
+                padding: 10px;
+            }
+            
+            .movie-title {
+                font-size: 14px;
+            }
+            
+            .movie-meta {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header/Navbar -->
+    <header id="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">Movie<span>Trail</span></a>
+            
+            <nav id="nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="trailers.html">Latest Trailers</a></li>
+                    <li><a href="upcoming.html">Upcoming</a></li>
+                    <li><a href="genres.html">Genres</a></li>
+                    <li><a href="top-rated.html" class="active">Top Rated</a></li>
+                </ul>
+            </nav>
+            
+            <div class="search-box">
+                <input type="text" placeholder="Search movies...">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <div class="mobile-menu" id="mobileMenu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Top Rated Movies of All Time</h1>
+            <p>Discover the highest rated films according to critics and audiences. Watch trailers for these cinematic masterpieces.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Top Banner Ad -->
+        <div class="container">
+            <div class="ad-banner">
+                <!-- Google AdSense Banner Ad -->
+                <div style="width: 100%; height: 90px; background-color: #333; display: flex; align-items: center; justify-content: center;">
+                    <span>Advertisement</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter Bar -->
+        <section class="section">
+            <div class="container">
+                <div class="filter-bar">
+                    <div class="filter-group">
+                        <span class="filter-label">Sort by:</span>
+                        <select class="filter-select">
+                            <option>Rating (Highest First)</option>
+                            <option>Rating (Lowest First)</option>
+                            <option>Release Date (Newest First)</option>
+                            <option>Release Date (Oldest First)</option>
+                            <option>Title (A-Z)</option>
+                            <option>Title (Z-A)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <span class="filter-label">Filter by:</span>
+                        <select class="filter-select">
+                            <option>All Genres</option>
+                            <option>Action</option>
+                            <option>Comedy</option>
+                            <option>Drama</option>
+                            <option>Sci-Fi</option>
+                            <option>Horror</option>
+                            <option>Romance</option>
+                            <option>Animation</option>
+                        </select>
+                        <select class="filter-select">
+                            <option>All Years</option>
+                            <option>2020s</option>
+                            <option>2010s</option>
+                            <option>2000s</option>
+                            <option>1990s</option>
+                            <option>1980s</option>
+                            <option>1970s</option>
+                            <option>1960s</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Top Rated Movies Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Highest Rated Films</h2>
+                    <span>Showing 1-20 of 250 movies</span>
+                </div>
+                
+                <div class="movie-grid">
+                    <!-- Movie Card 1 -->
+                    <div class="movie-card">
+                        <a href="the-shawshank-redemption.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg" alt="The Shawshank Redemption movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 9.3</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">The Shawshank Redemption</h3>
+                                <div class="movie-meta">
+                                    <span>1994</span>
+                                    <span>Drama</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 2 -->
+                    <div class="movie-card">
+                        <a href="the-godfather.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/3bhkrj58Vtu7enYsRolD1fZdja1.jpg" alt="The Godfather movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 9.2</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">The Godfather</h3>
+                                <div class="movie-meta">
+                                    <span>1972</span>
+                                    <span>Crime</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 3 -->
+                    <div class="movie-card">
+                        <a href="the-dark-knight.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg" alt="The Dark Knight movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 9.0</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">The Dark Knight</h3>
+                                <div class="movie-meta">
+                                    <span>2008</span>
+                                    <span>Action</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 4 -->
+                    <div class="movie-card">
+                        <a href="pulp-fiction.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg" alt="Pulp Fiction movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 8.9</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">Pulp Fiction</h3>
+                                <div class="movie-meta">
+                                    <span>1994</span>
+                                    <span>Crime</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 5 -->
+                    <div class="movie-card">
+                        <a href="fight-club.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg" alt="Fight Club movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 8.8</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">Fight Club</h3>
+                                <div class="movie-meta">
+                                    <span>1999</span>
+                                    <span>Drama</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 6 -->
+                    <div class="movie-card">
+                        <a href="inception.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg" alt="Inception movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 8.8</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">Inception</h3>
+                                <div class="movie-meta">
+                                    <span>2010</span>
+                                    <span>Sci-Fi</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 7 -->
+                    <div class="movie-card">
+                        <a href="the-matrix.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg" alt="The Matrix movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 8.7</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">The Matrix</h3>
+                                <div class="movie-meta">
+                                    <span>1999</span>
+                                    <span>Sci-Fi</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 8 -->
+                    <div class="movie-card">
+                        <a href="interstellar.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg" alt="Interstellar movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 8.7</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">Interstellar</h3>
+                                <div class="movie-meta">
+                                    <span>2014</span>
+                                    <span>Sci-Fi</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 9 -->
+                    <div class="movie-card">
+                        <a href="the-lord-of-the-rings.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/6oom5QYQ2yQTMJIbnvbkBL9cHo6.jpg" alt="The Lord of the Rings: The Fellowship of the Ring movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 8.5</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">The Lord of the Rings</h3>
+                                <div class="movie-meta">
+                                    <span>2001</span>
+                                    <span>Adventure</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 10 -->
+                    <div class="movie-card">
+                        <a href="forrest-gump.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/saHP97rTPS5eLmrLQEcANmKrsFl.jpg" alt="Forrest Gump movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 8.5</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">Forrest Gump</h3>
+                                <div class="movie-meta">
+                                    <span>1994</span>
+                                    <span>Drama</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 11 -->
+                    <div class="movie-card">
+                        <a href="the-good-the-bad-and-the-ugly.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/bXb00CkHqx7TPchTGG131sWV59y.jpg" alt="The Good, the Bad and the Ugly movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 8.5</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">The Good, the Bad and the Ugly</h3>
+                                <div class="movie-meta">
+                                    <span>1966</span>
+                                    <span>Western</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 12 -->
+                    <div class="movie-card">
+                        <a href="schindlers-list.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/sF1U4EUQS8YHUYjNl3pMGNIQyr0.jpg" alt="Schindler's List movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 8.5</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">Schindler's List</h3>
+                                <div class="movie-meta">
+                                    <span>1993</span>
+                                    <span>Drama</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 13 -->
+                    <div class="movie-card">
+                        <a href="the-silence-of-the-lambs.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/uS9m8OBk1A8eM9I042bx8XXpqAq.jpg" alt="The Silence of the Lambs movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 8.3</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">The Silence of the Lambs</h3>
+                                <div class="movie-meta">
+                                    <span>1991</span>
+                                    <span>Thriller</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 14 -->
+                    <div class="movie-card">
+                        <a href="se7en.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/6yoghtyTpznpBik8EngEmJskVUO.jpg" alt="Se7en movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 8.3</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">Se7en</h3>
+                                <div class="movie-meta">
+                                    <span>1995</span>
+                                    <span>Crime</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 15 -->
+                    <div class="movie-card">
+                        <a href="the-prestige.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/5MXyQfz8xUP3dIFPTubhTsbFY6N.jpg" alt="The Prestige movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 8.2</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">The Prestige</h3>
+                                <div class="movie-meta">
+                                    <span>2006</span>
+                                    <span>Drama</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 16 -->
+                    <div class="movie-card">
+                        <a href="gladiator.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/6WBIzCgmDCYrqh64yDREGeDk9d3.jpg" alt="Gladiator movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 8.2</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">Gladiator</h3>
+                                <div class="movie-meta">
+                                    <span>2000</span>
+                                    <span>Action</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 17 -->
+                    <div class="movie-card">
+                        <a href="the-departed.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/nT97ifVT2J1yMQmeq20Qblg61T.jpg" alt="The Departed movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 8.2</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">The Departed</h3>
+                                <div class="movie-meta">
+                                    <span>2006</span>
+                                    <span>Crime</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 18 -->
+                    <div class="movie-card">
+                        <a href="the-lion-king.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/sKCr78MXSLixwmZ8DyJLrpMsd15.jpg" alt="The Lion King movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 8.2</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">The Lion King</h3>
+                                <div class="movie-meta">
+                                    <span>1994</span>
+                                    <span>Animation</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 19 -->
+                    <div class="movie-card">
+                        <a href="whiplash.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/7fn624j5lj3xTme2SgiLCeuedmO.jpg" alt="Whiplash movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 8.1</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">Whiplash</h3>
+                                <div class="movie-meta">
+                                    <span>2014</span>
+                                    <span>Drama</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 20 -->
+                    <div class="movie-card">
+                        <a href="parasite.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg" alt="Parasite movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 8.1</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">Parasite</h3>
+                                <div class="movie-meta">
+                                    <span>2019</span>
+                                    <span>Thriller</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Pagination -->
+                <div class="pagination">
+                    <a href="#" class="active">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                    <a href="#"><i class="fas fa-chevron-right"></i></a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Mid Content Ad -->
+        <div class="container">
+            <div class="ad-banner">
+                <!-- Google AdSense Banner Ad -->
+                <div style="width: 100%; height: 90px; background-color: #333; display: flex; align-items: center; justify-content: center;">
+                    <span>Advertisement</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Highest Rated by Decade Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Highest Rated by Decade</h2>
+                </div>
+                
+                <div class="movie-grid">
+                    <!-- 2020s -->
+                    <div class="movie-card">
+                        <a href="dune-part-two.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/8b8R8l88Qje9dn9OE8PY05Nxl1X.jpg" alt="Dune: Part Two movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 8.8</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">Dune: Part Two (2024)</h3>
+                                <div class="movie-meta">
+                                    <span>Top 2020s</span>
+                                    <span>Sci-Fi</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- 2010s -->
+                    <div class="movie-card">
+                        <a href="parasite.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg" alt="Parasite movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 8.1</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">Parasite (2019)</h3>
+                                <div class="movie-meta">
+                                    <span>Top 2010s</span>
+                                    <span>Thriller</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- 2000s -->
+                    <div class="movie-card">
+                        <a href="the-dark-knight.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg" alt="The Dark Knight movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 9.0</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">The Dark Knight (2008)</h3>
+                                <div class="movie-meta">
+                                    <span>Top 2000s</span>
+                                    <span>Action</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- 1990s -->
+                    <div class="movie-card">
+                        <a href="the-shawshank-redemption.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg" alt="The Shawshank Redemption movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 9.3</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">Shawshank Redemption (1994)</h3>
+                                <div class="movie-meta">
+                                    <span>Top 1990s</span>
+                                    <span>Drama</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <div class="footer-logo">Movie<span>Trail</span></div>
+                    <p>MovieTrail is your premier destination for streaming the latest movie trailers in high definition. Discover upcoming releases and revisit classic moments.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="trailers.html">Latest Trailers</a></li>
+                        <li><a href="upcoming.html">Upcoming Movies</a></li>
+                        <li><a href="genres.html">Browse by Genre</a></li>
+                        <li><a href="top-rated.html">Top Rated</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Categories</h3>
+                    <ul>
+                        <li><a href="genre-action.html">Action</a></li>
+                        <li><a href="genre-comedy.html">Comedy</a></li>
+                        <li><a href="genre-drama.html">Drama</a></li>
+                        <li><a href="genre-scifi.html">Sci-Fi</a></li>
+                        <li><a href="genre-horror.html">Horror</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Help & Info</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="dmca.html">DMCA</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 MovieTrail. All Rights Reserved. All content and materials belong to their respective owners.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobileMenu');
+        const nav = document.getElementById('nav');
+        
+        mobileMenu.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            mobileMenu.classList.toggle('fa-times');
+        });
+        
+        // Sticky Header on Scroll
+        const header = document.getElementById('header');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Lazy Loading for Images
+        document.addEventListener("DOMContentLoaded", function() {
+            const lazyImages = [].slice.call(document.querySelectorAll("img[loading='lazy']"));
+            
+            if ("IntersectionObserver" in window) {
+                let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            let lazyImage = entry.target;
+                            lazyImage.src = lazyImage.dataset.src || lazyImage.src;
+                            lazyImageObserver.unobserve(lazyImage);
+                        }
+                    });
+                });
+                
+                lazyImages.forEach(function(lazyImage) {
+                    lazyImageObserver.observe(lazyImage);
+                });
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
