@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Watch the official trailer for Oppenheimer (2023) - The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.">
+    <title>Chhaava (2025) - Official Trailer | MovieTrail</title>
+    
+    <!-- Schema.org markup for Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Movie",
+      "name": "Chhaava",
+      "url": "https://movietrail.example.com/chhaava.html",
+      "image": "https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg",
+      "description": "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
+      "dateCreated": "2023-07-21",
+      "genre": ["Drama", "History"],
+      "actor": [
+        {
+          "@type": "Person",
+          "name": "Cillian Murphy"
+        },
+        {
+          "@type": "Person",
+          "name": "Emily Blunt"
+        },
+        {
+          "@type": "Person",
+          "name": "Matt Damon"
+        }
+      ],
+      "director": {
+        "@type": "Person",
+        "name": "Christopher Nolan"
+      },
+      "duration": "PT3H",
+      "contentRating": "R"
+    }
+    </script>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #e50914;
+            --primary-dark: #b2070f;
+            --dark-color: #141414;
+            --light-color: #f4f4f4;
+            --gray-color: #999;
+            --dark-gray: #222;
+            --light-gray: #333;
+            --transition: all 0.3s ease;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #000;
+            color: var(--light-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--light-color);
+            transition: var(--transition);
+        }
+        
+        a:hover {
+            color: var(--primary-color);
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: rgba(0, 0, 0, 0.9);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+            transition: var(--transition);
+        }
+        
+        header.scrolled {
+            background-color: var(--dark-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .logo span {
+            color: var(--light-color);
+        }
+        
+        nav ul {
+            display: flex;
+            gap: 25px;
+        }
+        
+        nav ul li a {
+            font-weight: 500;
+            font-size: 16px;
+            position: relative;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+        
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 100%;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            padding: 8px 15px;
+            width: 250px;
+        }
+        
+        .search-box input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--light-color);
+            padding: 5px;
+            width: 100%;
+            font-size: 14px;
+        }
+        
+        .search-box button {
+            background: transparent;
+            border: none;
+            color: var(--light-color);
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Movie Detail Page */
+        .movie-detail {
+            margin-top: 80px;
+            padding: 2rem 0;
+        }
+        
+        .detail-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+        }
+        
+        .detail-poster img {
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .detail-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .detail-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .detail-meta div {
+            margin-bottom: 0.5rem;
+        }
+        
+        .detail-meta span {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--gray-color);
+        }
+        
+        .detail-meta strong {
+            font-weight: 500;
+            color: var(--light-color);
+        }
+        
+        .detail-description {
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+        
+        .cast-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .cast-item {
+            text-align: center;
+            width: 80px;
+        }
+        
+        .cast-item img {
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            margin: 0 auto 0.5rem;
+        }
+        
+        .cast-item span {
+            font-size: 0.8rem;
+        }
+        
+        .trailer-container {
+            margin: 3rem 0;
+        }
+        
+        .trailer-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        
+        .trailer-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .watch-now {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        /* Ad Spaces */
+        .ad-banner {
+            background-color: var(--dark-gray);
+            padding: 1rem;
+            text-align: center;
+            margin: 2rem 0;
+            border-radius: 8px;
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .ad-sidebar {
+            background-color: var(--dark-gray);
+            padding: 1rem;
+            text-align: center;
+            border-radius: 8px;
+            min-height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Similar Movies */
+        .similar-movies {
+            margin: 3rem 0;
+        }
+        
+        .movie-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .movie-card {
+            background-color: var(--dark-gray);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        
+        .movie-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .movie-poster {
+            height: 225px;
+            overflow: hidden;
+        }
+        
+        .movie-poster img {
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .movie-card:hover .movie-poster img {
+            transform: scale(1.05);
+        }
+        
+        .movie-rating {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #ffd700;
+            padding: 0.3rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .movie-info {
+            padding: 1rem;
+        }
+        
+        .movie-title {
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .movie-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: var(--gray-color);
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 1.1rem;
+        }
+        
+        .btn:hover {
+            background-color: #f40612;
+            transform: scale(1.05);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .footer-logo span {
+            color: var(--light-color);
+        }
+        
+        .footer-about p {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--gray-color);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--dark-gray);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+        }
+        
+        .footer-links h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-links h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links ul li a {
+            font-size: 0.9rem;
+            color: var(--gray-color);
+            transition: var(--transition);
+        }
+        
+        .footer-links ul li a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid var(--dark-gray);
+            font-size: 0.9rem;
+            color: var(--gray-color);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .detail-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .detail-poster {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 70px);
+                background-color: var(--dark-color);
+                transition: var(--transition);
+                z-index: 99;
+            }
+            
+            nav.active {
+                left: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                padding: 2rem;
+            }
+            
+            nav ul li {
+                margin: 1rem 0;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .search-box {
+                margin-left: auto;
+                margin-right: 1rem;
+            }
+            
+            .detail-content h1 {
+                font-size: 2rem;
+            }
+            
+            .detail-meta {
+                gap: 1rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .detail-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .detail-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .movie-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 1rem;
+            }
+            
+            .movie-poster {
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header/Navbar -->
+    <header id="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">Movie<span>Trail</span></a>
+            
+            <nav id="nav">
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="trailers.html">Latest Trailers</a></li>
+                    <li><a href="upcoming.html">Upcoming</a></li>
+                    <li><a href="genres.html">Genres</a></li>
+                    <li><a href="top-rated.html">Top Rated</a></li>
+                </ul>
+            </nav>
+            
+            <div class="search-box">
+                <input type="text" placeholder="Search movies...">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <div class="mobile-menu" id="mobileMenu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Movie Detail Content -->
+    <main class="movie-detail">
+        <div class="detail-container">
+            <div class="detail-poster">
+                <img src="https://m.media-amazon.com/images/M/MV5BMDMyZjFmZTctNDAxYi00MWM3LWJiYmItM2VhNWZiM2IwNjNlXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Chhaava movie poster" loading="lazy">
+            </div>
+            
+            <div class="detail-content">
+                <h1>Chhaava</h1>
+                
+                <div class="detail-meta">
+                    <div>
+                        <span>IMDb Rating</span>
+                        <strong>8.5/10 <i class="fas fa-star" style="color: #ffd700;"></i></strong>
+                    </div>
+                    <div>
+                        <span>Release Date</span>
+                        <strong>February 14, 2025</strong>
+                    </div>
+                    <div>
+                        <span>Genre</span>
+                        <strong>Action, Drama, History</strong>
+                    </div>
+                    <div>
+                        <span>Director</span>
+                        <strong>Laxman Utekar</strong>
+                    </div>
+                    <div>
+                        <span>Runtime</span>
+                        <strong>161 min</strong>
+                    </div>
+                </div>
+                
+                <div class="detail-description">
+                    <p>Set in 17th-century India, Chhaava chronicles the life of Chhatrapati Sambhaji Maharaj, the valiant son of Chhatrapati Shivaji Maharaj. The film delves into Sambhaji's ascent to the throne, his fierce resistance against Mughal emperor Aurangzeb, and his unwavering commitment to preserving Maratha sovereignty. Through intense battles, political intrigue, and personal sacrifices, the narrative paints a vivid portrait of a warrior king whose legacy continues to inspire.</p>
+                </div>
+                
+                <div class="cast">
+                    <h3>Cast</h3>
+                    <div class="cast-list">
+                        <div class="cast-item">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwkSytKiF-l4Bb0bCMsk7rEh9d8omhkqhNpg&s" alt="Vicky Kaushal" loading="lazy">
+                            <span>Vicky Kaushal</span>
+                        </div>
+                        <div class="cast-item">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Rashmika-Mandanna_at_the_music_launch_of_Chhaava_%28cropped%29.jpg" alt="Rashmika Mandanna" loading="lazy">
+                            <span>Rashmika Mandanna</span>
+                        </div>
+                        <div class="cast-item">
+                            <img src="https://m.media-amazon.com/images/M/MV5BYWEwY2JlOTEtMDc4OC00ZDhhLTgxZDQtMTE2ODIyMjQ0NmJkXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Akshaye Khanna" loading="lazy">
+                            <span>Akshaye Khanna</span>
+                        </div>
+                        <div class="cast-item">
+                            <img src="https://m.media-amazon.com/images/M/MV5BNzUzOGRmZTUtZjAyMC00NjgxLWE3NDQtM2NiN2U2YzYxZjllXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Ashutosh Rana" loading="lazy">
+                            <span>Ashutosh Rana</span>
+                        </div>
+                        <div class="cast-item">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPBlDrWdzCl72r7R1UFg5S3eVHIJZSA8pjTQ&s" alt="Divya Dutta" loading="lazy">
+                            <span>Divya Dutta</span>
+                        </div>
+                        <div class="cast-item">
+                            <img src="https://m.media-amazon.com/images/M/MV5BODUzMjU1NTk4M15BMl5BanBnXkFtZTcwNjU2MTcxOA@@._V1_FMjpg_UX1000_.jpg" alt="Diana Penty" loading="lazy">
+                            <span>Diana Penty</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="watch-now">
+                    <a href="#" class="btn"><i class="fas fa-play"></i> Watch Now</a>
+                </div>
+                
+                <!-- Sidebar Ad -->
+                <div class="ad-sidebar">
+                    <!-- Google AdSense Sidebar Ad -->
+                    <div style="width: 100%; height: 250px; background-color: #333; display: flex; align-items: center; justify-content: center;">
+                        <span>Advertisement</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Trailer Section -->
+        <div class="trailer-container">
+            <div class="container">
+                <h2>Official Trailer</h2>
+                <div class="trailer-wrapper">
+                    <!-- YouTube Trailer Embed -->
+                    <iframe src="https://www.youtube.com/embed/77vRyWNqZjM?si=M0jTscRfIc3bQMOg" allowfullscreen loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Similar Movies -->
+        <div class="similar-movies">
+            <div class="container">
+                <h2>Similar Movies</h2>
+                <div class="movie-grid">
+                    <!-- Movie Card 1 -->
+                    <div class="movie-card">
+                        <a href="the-imitation-game.html">
+                            <div class="movie-poster">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgRPLWxR7Y8sVRuDlJp117Vtiuw4jMILbZhg&s" alt="The Imitation Game movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 8.0</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">The Imitation Game</h3>
+                                <div class="movie-meta">
+                                    <span>2014</span>
+                                    <span>Drama</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 2 -->
+                    <div class="movie-card">
+                        <a href="the-theory-of-everything.html">
+                            <div class="movie-poster">
+                                <img src="https://m.media-amazon.com/images/M/MV5BMTAwMTU4MDA3NDNeQTJeQWpwZ15BbWU4MDk4NTMxNTIx._V1_.jpg" alt="The Theory of Everything movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 7.7</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">The Theory of Everything</h3>
+                                <div class="movie-meta">
+                                    <span>2014</span>
+                                    <span>Drama</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 3 -->
+                    <div class="movie-card">
+                        <a href="darkest-hour.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/kc2gJjebceoFgOQbukzPzP8SXVZ.jpg" alt="Darkest Hour movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 7.4</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">Darkest Hour</h3>
+                                <div class="movie-meta">
+                                    <span>2017</span>
+                                    <span>Drama</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Movie Card 4 -->
+                    <div class="movie-card">
+                        <a href="dunkirk.html">
+                            <div class="movie-poster">
+                                <img src="https://image.tmdb.org/t/p/w500/ebSnODDg9lbsMIaWg2uAbjn7TO5.jpg" alt="Dunkirk movie poster" loading="lazy">
+                                <div class="movie-rating"><i class="fas fa-star"></i> 7.8</div>
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title">Dunkirk</h3>
+                                <div class="movie-meta">
+                                    <span>2017</span>
+                                    <span>War</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <div class="footer-logo">Movie<span>Trail</span></div>
+                <p>MovieTrail is your premier destination for streaming the latest movie trailers in high definition. Discover upcoming releases and revisit classic moments.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="trailers.html">Latest Trailers</a></li>
+                    <li><a href="upcoming.html">Upcoming Movies</a></li>
+                    <li><a href="top-rated.html">Top Rated</a></li>
+                    <li><a href="genres.html">Browse by Genre</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Categories</h3>
+                <ul>
+                    <li><a href="genre-action.html">Action</a></li>
+                    <li><a href="genre-comedy.html">Comedy</a></li>
+                    <li><a href="genre-drama.html">Drama</a></li>
+                    <li><a href="genre-scifi.html">Sci-Fi</a></li>
+                    <li><a href="genre-horror.html">Horror</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Help & Info</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="dmca.html">DMCA</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2023 MovieTrail. All Rights Reserved. All content and materials belong to their respective owners.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobileMenu');
+        const nav = document.getElementById('nav');
+        
+        mobileMenu.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+        
+        // Sticky Header on Scroll
+        const header = document.getElementById('header');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Lazy Loading for Images
+        document.addEventListener("DOMContentLoaded", function() {
+            var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+            
+            if ("IntersectionObserver" in window) {
+                let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            let lazyImage = entry.target;
+                            lazyImage.src = lazyImage.dataset.src;
+                            lazyImage.classList.remove("lazy");
+                            lazyImageObserver.unobserve(lazyImage);
+                        }
+                    });
+                });
+                
+                lazyImages.forEach(function(lazyImage) {
+                    lazyImageObserver.observe(lazyImage);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
